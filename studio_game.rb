@@ -1,7 +1,6 @@
 require_relative 'game'
 
 def time
-
   current_time = Time.new
   current_time.strftime("%I:%M:%S")
 end
@@ -14,4 +13,5 @@ players = [player1, player2, player3]
 
 knuckleheads = Game.new("Knuckleheads")
 players.each { |p| knuckleheads.add_player(p) }
-knuckleheads.play
+knuckleheads.play(1)
+knuckleheads.print_stats
