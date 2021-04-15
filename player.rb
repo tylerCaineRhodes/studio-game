@@ -6,6 +6,17 @@ class Player
   def initialize(name, health=100)
     @name = name.capitalize
     @health = health
+    @found_treasure = Hash.new(0)
+  end
+
+  def found_treasure(treasure)
+    @found_treasure[treasure.name] += treasure.points
+    puts "#{@name} found a treasure worth #{treasure.points} points."
+    puts "#{@name}'s treasures: #{@found_treasure}"
+  end
+
+  def points
+    @found_treasure.values.reduce(0, :+)
   end
 
   def <=>(other)
@@ -21,11 +32,11 @@ class Player
   end
 
   def to_s
-    "I'm #{@name} with a health of #{@health} and a score of #{score}."
+    "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
   end
 
   def score
-    @health + @name.length
+    @health + points
   end
 
   def blam

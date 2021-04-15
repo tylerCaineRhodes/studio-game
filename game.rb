@@ -26,18 +26,22 @@ class Game
     end
 
     puts "\n#{wimpy_players.size} wimpy players:"
-
     wimpy_players.each do |player|
       puts "#{player.name} (#{player.health})"
     end
 
     puts "\n#{title} High Scores:" 
-    
     @players.sort.each do |player|
       formatted_name = player.name.ljust(20, '.')
         puts "#{formatted_name} #{player.score}"
     end
+    
+    @players.each do |player|
+      puts "\n#{player.name}'s point totals:"
+      puts "#{player.points} grand total points"
+    end
 
+    puts "#{total_points} total points from treasures found"
   end
 
   def play(rounds)
@@ -55,13 +59,17 @@ class Game
       puts player
     end
 
-    rounds.times do |round|
+    (1..rounds).each do |round|
+      puts "\nRound #{round}"
       @players.each do |player|
         GameTurn.take_turn(player)
         puts player
       end
     end
+  end
 
+  def total_points
+    @players.reduce(0) { |acc, player| acc + player.points }
   end
 end
 
