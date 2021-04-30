@@ -1,7 +1,13 @@
+require_relative "treasure_trove"
 
 class Player
   attr_reader :health
   attr_accessor :name
+
+  def self.from_csv(string)
+    name, health = string.split(',')
+    Player.new(name, Integer(health))
+  end
 
   def initialize(name, health=100)
     @name = name.capitalize
@@ -13,6 +19,13 @@ class Player
     @found_treasure[treasure.name] += treasure.points
     puts "#{@name} found a treasure worth #{treasure.points} points."
     puts "#{@name}'s treasures: #{@found_treasure}"
+  end
+
+  def each_found_treasure
+    @found_treasure.each do |key, val|
+      treasure = Treasure.new(key, val)
+      yield treasure
+    end
   end
 
   def points
