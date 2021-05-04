@@ -1,4 +1,5 @@
-require_relative 'player'
+require_relative "player"
+require_relative "auditable"
 
 class Die
   attr_reader :number
@@ -9,6 +10,8 @@ class Die
 
   def roll
     @number = rand(1..6)
+    audit
+    @number
   end
 end
 

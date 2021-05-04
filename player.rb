@@ -1,7 +1,10 @@
 require_relative "treasure_trove"
+require_relative "playable"
 
 class Player
-  attr_reader :health
+  
+  include Playable
+  attr_accessor :health
   attr_accessor :name
 
   def self.from_csv(string)
@@ -36,30 +39,12 @@ class Player
     other.score <=> score
   end
 
-  def name=(new_name)
-    @name = new_name.capitalize
-  end
-
-  def strong?
-    @health > 100
-  end
-
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
   end
 
   def score
     @health + points
-  end
-
-  def blam
-    @health -= 10
-    puts "#{@name} got blammed!"
-  end
-
-  def w00t
-    @health += 15
-    puts "#{@name} got w00ted!"
   end
 end
 
