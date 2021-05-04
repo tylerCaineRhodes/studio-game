@@ -1,10 +1,14 @@
-require_relative 'player'
+require_relative 'berserk_player'
 require_relative 'game'
+require_relative 'player'
 
 
 
 knuckleheads = Game.new("Knuckleheads")
 knuckleheads.load_players(VARGS.shift ||"players.csv")
+
+berserker = BerserkPlayer.new("berserker", 50)
+knuckleheads.add_player(berserker)
 
 
 loop do
